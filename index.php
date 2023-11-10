@@ -19,7 +19,7 @@
         </header>
 
           <?php
-        $cadena_conexion = 'mysql:dbname=ejemplo;host=127.0.0.1';
+        $cadena_conexion = 'mysql:dbname=joel;host=127.0.0.1';
         $usuario = 'joel';
         $clave = 'joel';
 
