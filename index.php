@@ -13,12 +13,29 @@
             <h2>Inventory management</h2>
             <div>
                 <p>Iván García y Joel Ortiz</p>
-          
                 <p>Curso: 2º DAW</p>
                 <p>Módulo: Desarrollo web en entorno servidor (DWES)</p>
             </div>
         </header>
 
+          <?php
+        $cadena_conexion = 'mysql:dbname=ejemplo;host=127.0.0.1';
+        $usuario = 'joel';
+        $clave = 'joel';
+
+        try {
+            //Se crea la conexión con la base de datos
+            $bd = new PDO($cadena_conexion, $usuario, $clave);
+            // Opcional en MySQL, dependiendo del controlador 
+            // de base de datos puede ser obligatorio
+            //$bd->closeCursor();
+            echo "Conexión establecida";
+            //Se cierra la conexión
+            $bd = null;
+        } catch (Exception $e) {
+            echo "Error con la base de datos: " . $e->getMessage();
+        }
+        ?>
         <div>
           
         </div>                       
