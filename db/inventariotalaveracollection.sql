@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2023 a las 19:29:56
+-- Tiempo de generación: 16-11-2023 a las 19:25:33
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -31,7 +31,8 @@ CREATE TABLE `almacen` (
   `codalmacen` int(6) NOT NULL,
   `nomalmacen` varchar(50) NOT NULL,
   `direccionalmacen` varchar(100) NOT NULL,
-  `telefonoalmacen` varchar(15) NOT NULL
+  `telefonoalmacen` varchar(15) NOT NULL,
+  `codusuario` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -62,8 +63,7 @@ CREATE TABLE `usuario` (
   `Nomusuario` varchar(50) NOT NULL,
   `Contraseñausuario` varchar(255) NOT NULL,
   `Direccionusuario` varchar(100) NOT NULL,
-  `Telefonousuario` varchar(15) NOT NULL,
-  `Codalmacen` int(6) NOT NULL
+  `Telefonousuario` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -74,37 +74,59 @@ CREATE TABLE `usuario` (
 -- Indices de la tabla `almacen`
 --
 ALTER TABLE `almacen`
-  ADD PRIMARY KEY (`codalmacen`);
+  ADD PRIMARY KEY (`codalmacen`),
+  ADD KEY `fk_codusuario` (`codusuario`);
 
 --
 -- Indices de la tabla `objeto`
 --
 ALTER TABLE `objeto`
   ADD PRIMARY KEY (`Claveobjeto`),
-  ADD KEY `Codalmacen` (`Codalmacen`);
+  ADD KEY `fk_codalmacen` (`Codalmacen`);
 
 --
 -- Indices de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  ADD PRIMARY KEY (`Codusuario`),
-  ADD KEY `Codalmacen` (`Codalmacen`);
+  ADD PRIMARY KEY (`Codusuario`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `almacen`
+--
+ALTER TABLE `almacen`
+  MODIFY `codalmacen` int(6) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `objeto`
+--
+ALTER TABLE `objeto`
+  MODIFY `Claveobjeto` int(6) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `usuario`
+--
+ALTER TABLE `usuario`
+  MODIFY `Codusuario` int(6) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
+-- Filtros para la tabla `almacen`
+--
+ALTER TABLE `almacen`
+  ADD CONSTRAINT `fk_codusuario` FOREIGN KEY (`codusuario`) REFERENCES `usuario` (`Codusuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Filtros para la tabla `objeto`
 --
 ALTER TABLE `objeto`
-  ADD CONSTRAINT `objeto_ibfk_1` FOREIGN KEY (`Codalmacen`) REFERENCES `almacen` (`codalmacen`);
-
---
--- Filtros para la tabla `usuario`
---
-ALTER TABLE `usuario`
-  ADD CONSTRAINT `usuario_ibfk_1` FOREIGN KEY (`Codalmacen`) REFERENCES `almacen` (`codalmacen`);
+  ADD CONSTRAINT `fk_codalmacen` FOREIGN KEY (`Codalmacen`) REFERENCES `almacen` (`codalmacen`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
