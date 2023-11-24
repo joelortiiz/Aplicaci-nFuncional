@@ -8,18 +8,11 @@
         <title>Página</title>
     </head>
     <body>
-        <?php
-        session_start();
-        
+        <?php        
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            try {
-                // joel,joel
-                $db = new PDO('mysql:host=localhost;dbname=inventariotalaveracollection', 'joel', 'joel');
-            } catch (PDOException $e) {
-                echo 'La página no está disponible actualmente';
-                exit;
-            }
-
+            //para conectarse con la base de datos
+            require_once('../functions/dbConnection.php');
+            
             // recogemos los datos de usuario
             $nombre = htmlspecialchars($_POST["username"]);
             // codificar la contraseña a md5 (o utilizar password_hash)
@@ -32,9 +25,14 @@
             $count = $checkUser ->rowCount();
            
             if($count > 0){
-                echo 'bien';
+               // echo 'bien';
+               
+                //Hacer cookie con usuario
+               //inicio de la sesión.
+                session_start();
+                $_SESSION['name'] = $nombre;
+                header('Location: ../functions/session_validate.php');
             } else {
-                echo $count;
                 echo 'mal';
             }
         } else {
