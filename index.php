@@ -23,11 +23,11 @@
             <form class="" action="./pages/pagina.php" method="POST">
                 <div class="form-group">
                     <label for="username">Nombre de Usuario</label>
-                    <input type="text" class="form-control" id="username" placeholder="Usuario">
+                    <input type="text" class="form-control" id="username" placeholder="Usuario" name="username">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Contraseña</label>
-                    <input type="password" class="form-control" id="password" placeholder="">
+                    <input type="password" class="form-control" id="password" placeholder="" name="password">
                 </div>
                 <div class="mt-2 text-center">
                         <button type="submit" class="btn btn-primary">Entrar</button>
@@ -37,22 +37,22 @@
              </form>
         </div>
         <?php
-        $cadena_conexion = 'mysql:dbname=joel;host=127.0.0.1';
-        $usuario = 'joel';
-        $clave = 'joel';
+   //     $cadena_conexion = 'mysql:dbname=inventariotalaveracollection;host=127.0.0.1';
+   //     $usuario = 'joel';
+     //    $clave = 'joel';
 
-        try {
+   //      try {
             //Se crea la conexión con la base de datos
-            $bd = new PDO($cadena_conexion, $usuario, $clave);
+    //         $bd = new PDO($cadena_conexion, $usuario, $clave);
             // Opcional en MySQL, dependiendo del controlador 
             // de base de datos puede ser obligatorio
             //$bd->closeCursor();
-            echo "Conexión establecida";
-            //Se cierra la conexión
-            $bd = null;
-        } catch (Exception $e) {
-            echo "Error con la base de datos: " . $e->getMessage();
-        }
+                // echo "Conexión establecida";
+  //           //Se cierra la conexión
+  //           $bd = null;
+  //       } catch (Exception $e) {
+  //           echo "La página no está disponible";
+  //       }
         ?>  
               </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
