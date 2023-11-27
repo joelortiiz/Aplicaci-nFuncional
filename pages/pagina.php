@@ -28,7 +28,7 @@
                // echo 'bien';
                
                 //Hacer cookie con usuario
-               //inicio de la sesión.
+                //inicio de la sesión.
                 session_start();
                 $_SESSION['name'] = $nombre;
                 header('Location: ../functions/session_validate.php');
