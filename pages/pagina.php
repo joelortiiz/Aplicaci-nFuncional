@@ -1,17 +1,13 @@
 <?php
+//require_once('../functions/dbConnection.php');
 require '../files/functions.php';
-$user = 'joel';
-$bd = connectionBBDD('mysql:dbname=exposicion;host=127.0.0.1', 'root', '');
-//comprobamos si existe usuario desde ela rchivo requerido anterior se maneja esta posibilidad y se guarda en una variable
-if (isset($user)) {
-    //rezlimaos la consulta para sacar por pantalla los nombres de las mascotas del usuario para qeu pueda eleir una de ellas
-    $sql = "select nombre,especie,raza,edad,fechaNacimiento,peso from mascotas where dni_propietario in (SELECT dni from personas where nombre = '$user')";
-    $mascotas = selectValues($bd, $sql);
-}
-//Cerramos la conexión con la base de datos 
-$bd = null;
-?>
 
+$user = 'joel';
+if (isset($user)) {
+    $sql = "SELECT Nombreobjeto, Estadoobjeto, Marca, Stock, Anio, Comentario, Codalmacen from objeto where ''";
+    $inventarios = selectInventarios($bd, $sql);
+}$bd = null;
+?>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -24,15 +20,12 @@ $bd = null;
     <body>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            //para conectarse con la base de datos
             require_once('../functions/dbConnection.php');
-
-            // recogemos los datos de usuario
+            //codificamos
             $nombre = htmlspecialchars($_POST["username"]);
-            // codificar la contraseña a md5 (o utilizar password_hash)
             $password = htmlspecialchars($_POST["password"]);
 
-            // sacar el usuario de la base de datos
+            // Buscamos el usuario en la base de datos
             $checkUser = $db->prepare("SELECT codusuario, Nomusuario, Contraseñausuario FROM usuario WHERE Nomusuario = ? AND Contraseñausuario = ?");
             $checkUser->execute([$nombre, $password]);
 
@@ -92,7 +85,7 @@ $bd = null;
                                         <td>Comentario 2</td>
                                         <td>XYZ789</td>
                                     </tr>
-                                    <!-- Agrega más filas según sea necesario -->
+                                    
                                 </tbody>
                             </table>
                         </section>
