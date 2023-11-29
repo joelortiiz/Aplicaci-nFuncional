@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-11-2023 a las 19:25:33
+-- Tiempo de generación: 29-11-2023 a las 10:54:30
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -34,6 +34,13 @@ CREATE TABLE `almacen` (
   `telefonoalmacen` varchar(15) NOT NULL,
   `codusuario` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `almacen`
+--
+
+INSERT INTO `almacen` (`codalmacen`, `nomalmacen`, `direccionalmacen`, `telefonoalmacen`, `codusuario`) VALUES
+(1, 'Almacen 1', 'Calle Inventada', '12 34 56 78', 1);
 
 -- --------------------------------------------------------
 
@@ -67,6 +74,14 @@ CREATE TABLE `usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`Codusuario`, `Nomusuario`, `Contraseñausuario`, `Direccionusuario`, `Telefonousuario`) VALUES
+(1, 'ivangargalan', '123', 'Calle Eusebio Rubalcaba 1', '674222839'),
+(5, 'usuario2', '81dc9bdb52d04dc20036dbd8313ed055', 'casa', '1234567890');
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -98,7 +113,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `almacen`
 --
 ALTER TABLE `almacen`
-  MODIFY `codalmacen` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `codalmacen` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `objeto`
@@ -110,7 +125,7 @@ ALTER TABLE `objeto`
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `Codusuario` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `Codusuario` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas

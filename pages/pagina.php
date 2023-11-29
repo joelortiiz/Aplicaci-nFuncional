@@ -15,8 +15,8 @@
             
             // recogemos los datos de usuario
             $nombre = htmlspecialchars($_POST["username"]);
-            // codificar la contraseña a md5 (o utilizar password_hash)
-            $password = htmlspecialchars($_POST["password"]);
+            // codificar la contraseña a md5
+            $password = md5(htmlspecialchars($_POST["password"]));
 
             // sacar el usuario de la base de datos
             $checkUser = $db->prepare("SELECT codusuario, Nomusuario, Contraseñausuario FROM usuario WHERE Nomusuario = ? AND Contraseñausuario = ?");

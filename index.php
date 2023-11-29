@@ -37,8 +37,8 @@
                 </form>
 
                 <!-- Registro de nuevo usuario -->
-                <!-- Poner nuevo usuario -->
-                <form action="action" method="POST">
+                <h2>¿Nuevo usuario? Registrese aquí</h2>
+                <form action="./pages/newUser.php" method="POST">
                     <div class="form-group">
                         <label for="username">Nombre de Usuario</label>
                         <input type="text" class="form-control" id="username" placeholder="Usuario" name="username">
@@ -46,26 +46,27 @@
 
                     <div class="form-group">
                         <label for="password">Contraseña</label>
-                        <input type="password" class="form-control" id="password" placeholder="" name="password">
+                        <input type="password" class="form-control" id="password" placeholder="*****" name="password">
                     </div>
 
                     <div class="form-group">
-                        <label for="passwordRepeat">Contraseña</label>
-                        <input type="password" class="form-control" id="passwordRepeat" placeholder="" name="passwordRepeat">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="passwordRepeat">Contraseña</label>
-                        <input type="password" class="form-control" id="passwordRepeat" placeholder="" name="passwordRepeat">
+                        <label for="passwordRepeat">Repetir la contraseña</label>
+                        <input type="password" class="form-control" id="passwordRepeat" placeholder="*****" name="passwordRepeat">
                     </div>
 
                     <div class="form-group">
                         <label for="direccion">Direccion</label>
                         <input type="text" class="form-control" id="direccion" placeholder="" name="direccion">
                     </div>
-                    
-                    
 
+                    <div class="form-group">
+                        <label for="telefono">Telefono</label>
+                        <input type="tel" class="form-control" id="telefono" placeholder="" name="telefono">
+                    </div>
+
+                    <div class="mt-2 text-center">
+                        <button type="submit" class="btn btn-primary">Registrarse</button>
+                    </div>
                 </form>
 
 
