@@ -1,12 +1,19 @@
 <?php
 //require_once('../functions/dbConnection.php');
-require '../files/functions.php';
-
+require '../functions/functions.php';
+try {
+    // joel,joel
+    $db = new PDO('mysql:host=localhost;dbname=inventariotalaveracollection', 'joel', 'joel');
+} catch (PDOException $e) {
+    echo 'La página no está disponible actualmente';
+    exit;
+}
 $user = 'joel';
 if (isset($user)) {
-    $sql = "SELECT Nombreobjeto, Estadoobjeto, Marca, Stock, Anio, Comentario, Codalmacen from objeto where ''";
-    $inventarios = selectInventarios($bd, $sql);
-}$bd = null;
+    $sql = ("select * FROM almacen where Codusuario = (select Codusuario from usuario where Nomusuario = 'joel')");
+
+    $inventarios = selectInventarios($db, $sql);
+}//$db = null;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,13 +21,13 @@ if (isset($user)) {
         <meta charset="UTF-8">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-        <link rel="stylesheet" href="../assets/css/style.css">
+        <link rel="stylesheet" href="../css/style.css">
         <title>Página</title>
     </head>
     <body>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            require_once('../functions/dbConnection.php');
+            //   require_once('../functions/dbConnection.php');
             //codificamos
             $nombre = htmlspecialchars($_POST["username"]);
             $password = htmlspecialchars($_POST["password"]);
@@ -38,7 +45,7 @@ if (isset($user)) {
                 //inicio de la sesión.
                 session_start();
                 $_SESSION['name'] = $nombre;
-                header('Location: ../functions/session_validate.php');
+                //   header('Location: ../functions/session_validate.php');
                 ?>
 
                 <div class="container d-flex justify-content-center align-items-center flex-column">
@@ -60,23 +67,34 @@ if (isset($user)) {
                             <table class="table table-striped table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
+                                        <th scope="col">C.Almacén</th>
                                         <th scope="col">Nombre</th>
-                                        <th scope="col">Estado</th>
-                                        <th scope="col">Marca</th>
-                                        <th scope="col">Stock</th>
-                                        <th scope="col">Año</th>
-                                        <th scope="col">Comentario</th>
-                                        <th scope="col">Cod Almacén</th>
+                                        <th scope="col">Dirección</th>
+                                        <th scope="col">Teléfono</th>
+                                        <th scope="col">C.Usuario</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    <tr>
-                                   <?php
-                                   
-                                   ?>
-                                    </tr>
-                                    <tr>
+                                    <?php
+                                    $search = $db->prepare("select nomalmacen, direccionalmacen, telefonoalmacen FROM almacen where codusuario = (select Codusuario from usuario where Nomusuario = 'joelortiz')");
+                        
+                                    $search->execute();
+                                    // Se recoge cada resultado y se lleva a la tabla
+                                    while ($fetch = $search->fetch()) {
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $fetch['nomalmacen'] ?></td>
+                                            <td><?php echo $fetch['direccionalmacen'] ?></td>
+                                            <td><?php echo $fetch['telefonoalmacen'] ?></td>
+                                        </tr>
+
+                                        <?php
+                                    }
+                                    ?>
+
+                                        <!--    <tr>
                                         <td>Producto 2</td>
                                         <td>Agotado</td>
                                         <td>Marca B</td>
@@ -84,8 +102,29 @@ if (isset($user)) {
                                         <td>2021</td>
                                         <td>Comentario 2</td>
                                         <td>XYZ789</td>
-                                    </tr>
-                                    
+                                        <td>
+                                            <div class="mt-2 text-center">
+                                                <button type="submit" class="btn btn-danger">
+                                                    Eliminar
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="mt-2 text-center">
+                                                <button type="submit" class="btn btn-warning">
+                                                    Actualizar
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="mt-2 text-center">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Entrar
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>  --> 
+
                                 </tbody>
                             </table>
                         </section>
