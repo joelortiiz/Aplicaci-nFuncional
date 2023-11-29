@@ -5,7 +5,7 @@
             return true;
         } else {
             //que devuelva un mensaje de error
-            header('Location:../index.php');
+            header('Location:../index.php?errorNew');
             exit;
         }
     }
@@ -29,13 +29,16 @@
             
             $telefono = htmlspecialchars($_POST['telefono']);
             
-            $insertUser = $db->prepare("INSERT INTO USUARIO(Nomusuario,Contraseñausuario,Direccionusuario,Telefonousuario) VALUES(?,?,?,?)");//insert into a la tabla usuarios
-            $insertUser->execute([$nombre,$password,$direccion,$telefono]);
-            
-            header('Location:../index.php');
-            
-            
+            if($nombre =='' or $password == '' or $direccion=='' or $telefono==''){
+                header('Location:../index.php?errorNew');
+                exit;
+            } else {
+                $insertUser = $db->prepare("INSERT INTO USUARIO(Nomusuario,Contraseñausuario,Direccionusuario,Telefonousuario) VALUES(?,?,?,?)");//insert into a la tabla usuarios
+                $insertUser->execute([$nombre,$password,$direccion,$telefono]);
+                header('Location:../index.php?success');
+            }
+                  
     } else {
-        header('Location:../index.php');
+        header('Location:../index.php?errorNew');
         
     }

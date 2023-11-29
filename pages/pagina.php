@@ -33,7 +33,7 @@
                 $_SESSION['name'] = $nombre;
                 header('Location: ../functions/session_validate.php');
             } else {
-                echo 'mal';
+                header('Location: ../index.php?error');
             }
         } else {
             echo 'No se ha aprendido la página';

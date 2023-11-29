@@ -20,6 +20,12 @@
                 </div>
             </header>
             <div>
+                <?php 
+                    //para ver los errores de inicio de sesión
+                    if(isset($_GET['error'])){
+                        echo '<p class="text-danger"> Datos incorrectos </p>';
+                    }
+                ?>
                 <form class="" action="./pages/pagina.php" method="POST">
                     <div class="form-group">
                         <label for="username">Nombre de Usuario</label>
@@ -38,6 +44,14 @@
 
                 <!-- Registro de nuevo usuario -->
                 <h2>¿Nuevo usuario? Registrese aquí</h2>
+                <?php 
+                    if(isset($_GET['errorNew'])){
+                        echo '<p class="text-danger"> Datos mal introducidos, vuelva a introducirlos</p>';
+                    }elseif(isset($_GET['success'])){
+                        echo '<p class="text-success">Usuario registrado exitosamente</p>';
+                    }
+                
+                ?>
                 <form action="./pages/newUser.php" method="POST">
                     <div class="form-group">
                         <label for="username">Nombre de Usuario</label>
