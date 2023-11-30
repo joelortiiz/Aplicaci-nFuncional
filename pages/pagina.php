@@ -40,7 +40,13 @@ if (isset($user)) {
 
             if ($count > 0) {
                 // echo 'bien';
-                setcookie("usuario", $_POST["username"], time() + 3600 * 24, "/");
+                if(isset($_COOKIE['usercookie'])) {
+                setcookie("usercookie", "", time() - 3600 * 24, "/");
+                setcookie("usercookie", $_POST["username"], time() + 3600 * 24, "/");
+                } else {
+                    
+                setcookie("usercookie", $_POST["username"], time() + 3600 * 24, "/");
+                }
                 //Hacer cookie con usuario
                 //inicio de la sesión.
                 session_start();
@@ -50,8 +56,9 @@ if (isset($user)) {
 
                 <div class="container d-flex justify-content-center align-items-center flex-column">
                     <header class="d-flex flex-column">
+                     
                         <h1>
-                            Bienvenido a tus inventarios, //Usuario
+                            Bienvenido a tus inventarios, <?php echo "<p class=''>" .$nombre ."</p>"; ?>
                         </h1>
                         <?php
                         setlocale(LC_TIME, "spanish");
@@ -78,16 +85,38 @@ if (isset($user)) {
                                 <tbody>
 
                                     <?php
-                                    $search = $db->prepare("select nomalmacen, direccionalmacen, telefonoalmacen FROM almacen where codusuario = (select Codusuario from usuario where Nomusuario = 'joelortiz')");
+                                    $search = $db->prepare("select * FROM almacen where codusuario = (select Codusuario from usuario where Nomusuario = '" .$_POST['username'] ."')");
                         
                                     $search->execute();
                                     // Se recoge cada resultado y se lleva a la tabla
                                     while ($fetch = $search->fetch()) {
                                         ?>
                                         <tr>
+                                            <td><?php echo $fetch['codalmacen'] ?></td>
                                             <td><?php echo $fetch['nomalmacen'] ?></td>
                                             <td><?php echo $fetch['direccionalmacen'] ?></td>
                                             <td><?php echo $fetch['telefonoalmacen'] ?></td>
+                                            <td><?php echo $fetch['codusuario'] ?></td>
+                                             <td>
+                                            <div class="mt-2 text-center">
+                                                <?php $id = $fetch['codalmacen']?>
+                                                 <a href="delete.php?id=<?php echo $id ?>" class="btn btn-danger">X</a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="mt-2 text-center">
+                                                <button type="submit" class="btn btn-warning">
+                                                    Actualizar
+                                                </button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="mt-2 text-center">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Entrar
+                                                </button>
+                                            </div>
+                                        </td>
                                         </tr>
 
                                         <?php
