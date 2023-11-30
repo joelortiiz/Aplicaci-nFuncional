@@ -1,19 +1,13 @@
 <?php
-//require_once('../functions/dbConnection.php');
+require_once('../functions/dbConnection.php');
 require '../functions/functions.php';
-try {
-    // joel,joel
-    $db = new PDO('mysql:host=localhost;dbname=inventariotalaveracollection', 'joel', 'joel');
-} catch (PDOException $e) {
-    echo 'La página no está disponible actualmente';
-    exit;
-}
-$user = 'joel';
-if (isset($user)) {
-    $sql = ("select * FROM almacen where Codusuario = (select Codusuario from usuario where Nomusuario = 'joel')");
 
-    $inventarios = selectInventarios($db, $sql);
-}//$db = null;
+//inicio de la sesión.
+session_start();
+
+//Aquí, se manda a un enlace que cierra la sesión
+echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí </a>';
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -25,40 +19,12 @@ if (isset($user)) {
         <title>Página</title>
     </head>
     <body>
-        <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            //   require_once('../functions/dbConnection.php');
-            //codificamos
-            $nombre = htmlspecialchars($_POST["username"]);
-            $password = htmlspecialchars($_POST["password"]);
-
-            // Buscamos el usuario en la base de datos
-            $checkUser = $db->prepare("SELECT codusuario, Nomusuario, Contraseñausuario FROM usuario WHERE Nomusuario = ? AND Contraseñausuario = ?");
-            $checkUser->execute([$nombre, $password]);
-
-            $count = $checkUser->rowCount();
-
-            if ($count > 0) {
-                // echo 'bien';
-                if(isset($_COOKIE['usercookie'])) {
-                setcookie("usercookie", "", time() - 3600 * 24, "/");
-                setcookie("usercookie", $_POST["username"], time() + 3600 * 24, "/");
-                } else {
-                    
-                setcookie("usercookie", $_POST["username"], time() + 3600 * 24, "/");
-                }
-                //Hacer cookie con usuario
-                //inicio de la sesión.
-                session_start();
-                $_SESSION['name'] = $nombre;
-                //   header('Location: ../functions/session_validate.php');
-                ?>
 
                 <div class="container d-flex justify-content-center align-items-center flex-column">
                     <header class="d-flex flex-column">
                      
                         <h1>
-                            Bienvenido a tus inventarios, <?php echo "<p class=''>" .$nombre ."</p>"; ?>
+                            Bienvenido a tu inventario de, <?php echo "<p class='text-uppercase'>" .$_COOKIE['usercookie'] ."</p>"; ?>
                         </h1>
                         <?php
                         setlocale(LC_TIME, "spanish");
@@ -74,32 +40,36 @@ if (isset($user)) {
                             <table class="table table-striped table-bordered">
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col">C.Almacén</th>
+                                        <th scope="col">C.Objeto</th>
                                         <th scope="col">Nombre</th>
-                                        <th scope="col">Dirección</th>
-                                        <th scope="col">Teléfono</th>
-                                        <th scope="col">C.Usuario</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Marca</th>
+                                        <th scope="col">Año</th>
+                                        <th scope="col">Comentario</th>
+                                        <th scope="col">C.Almacén</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <?php
-                                    $search = $db->prepare("select * FROM almacen where codusuario = (select Codusuario from usuario where Nomusuario = '" .$_POST['username'] ."')");
+                                    $search = $db->prepare("SELECT * FROM objeto WHERE Codalmacen IN (SELECT codalmacen FROM almacen WHERE codusuario = (SELECT Codusuario FROM usuario WHERE Nomusuario = 'joelortiz'))");
+
                         
                                     $search->execute();
                                     // Se recoge cada resultado y se lleva a la tabla
                                     while ($fetch = $search->fetch()) {
                                         ?>
                                         <tr>
-                                            <td><?php echo $fetch['codalmacen'] ?></td>
-                                            <td><?php echo $fetch['nomalmacen'] ?></td>
-                                            <td><?php echo $fetch['direccionalmacen'] ?></td>
-                                            <td><?php echo $fetch['telefonoalmacen'] ?></td>
-                                            <td><?php echo $fetch['codusuario'] ?></td>
+                                            <td><?php echo $fetch['Claveobjeto'] ?></td>
+                                            <td><?php echo $fetch['Nombreobjeto'] ?></td>
+                                            <td><?php echo $fetch['Estadoobjeto'] ?></td>
+                                            <td><?php echo $fetch['Marca'] ?></td>
+                                            <td><?php echo $fetch['Stock'] ?></td>
+                                            <td><?php echo $fetch['Anio'] ?></td>
+                                            <td><?php echo $fetch['Comentario'] ?></td>
                                              <td>
                                             <div class="mt-2 text-center">
-                                                <?php $id = $fetch['codalmacen']?>
                                                  <a href="delete.php?id=<?php echo $id ?>" class="btn btn-danger">X</a>
                                             </div>
                                         </td>
@@ -112,7 +82,9 @@ if (isset($user)) {
                                         </td>
                                         <td>
                                             <div class="mt-2 text-center">
-                                                <a href="./objetos.php" class="btn btn-primary">Entrar</a>
+                                                <button type="submit" class="btn btn-primary">
+                                                    Entrar
+                                                </button>
                                             </div>
                                         </td>
                                         </tr>
@@ -159,12 +131,8 @@ if (isset($user)) {
                 </div>
 
                 <?php
-            } else {
-                echo 'mal';
-            }
-        } else {
-            echo 'No has rellenado el formulario de login.';
-        }
+            
+        
         ?>
 
 
