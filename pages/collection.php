@@ -5,8 +5,7 @@ require '../functions/functions.php';
 //inicio de la sesión.
 session_start();
 
-//Aquí, se manda a un enlace que cierra la sesión
-echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí </a>';
+
 
 ?>
 <!DOCTYPE html>
@@ -16,7 +15,7 @@ echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí <
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <link rel="stylesheet" href="../css/style.css">
-        <title>Página</title>
+        <title>Colecciones</title>
     </head>
     <body>
         <?php
@@ -52,7 +51,11 @@ echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí <
             <header class="d-flex flex-column">
                 <h1>
                     Bienvenido a tus inventarios, <?= $_SESSION['name'] ?>
+            
+                  
                 </h1>
+                    <!-- Aquí, se manda a un enlace que cierra la sesión -->
+                    <?=  '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí </a>'; ?>
                 <?php
                 setlocale(LC_TIME, "spanish");
                 $fecha_act = strftime("%A, %d de %B de %Y");

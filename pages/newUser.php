@@ -29,7 +29,10 @@
             
             $telefono = htmlspecialchars($_POST['telefono']);
             
-            if($nombre =='' or $password == '' or $direccion=='' or $telefono==''){
+            
+            //esta expresión regular mira si el telefono tiene valores de la A a la Z
+            //de mayúscula a minúscula
+            if($nombre =='' or $password == '' or $direccion=='' or $telefono=='' or preg_match('/^[A-Za-z]+$/', $telefono)){
                 header('Location:../index.php?errorNew');
                 exit;
             } else {
