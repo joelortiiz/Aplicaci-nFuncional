@@ -127,6 +127,20 @@ ALTER TABLE `almacen`
 --
 ALTER TABLE `objeto`
   ADD CONSTRAINT `fk_codalmacen` FOREIGN KEY (`Codalmacen`) REFERENCES `almacen` (`codalmacen`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+INSERT INTO `objeto` (`Claveobjeto`, `Nombreobjeto`, `Estadoobjeto`, `Marca`, `Stock`, `Anio`, `Comentario`, `Codalmacen`) 
+VALUES 
+(NULL, 'Laptop', 'Nuevo', 'HP', 20, '2023-01-15', 'Último modelo, pantalla táctil', 1),
+(NULL, 'Smartphone', 'Usado', 'Samsung', 15, '2023-02-02', 'Pequeños rasguños en la parte posterior', 1),
+(NULL, 'Auriculares', 'Nuevo', 'Sony', 50, '2023-03-10', 'Cancelación de ruido, cable desmontable', 1),
+(NULL, 'Cámara', 'Seminuevo', 'Canon', 10, '2023-04-05', 'Incluye estuche y tarjeta de memoria', 2),
+(NULL, 'Impresora', 'Nuevo', 'Epson', 5, '2023-05-20', 'Impresión a color, conexión inalámbrica',1),
+(NULL, 'Altavoces', 'Reacondicionado', 'Bose', 8, '2023-06-08', 'Calidad de sonido mejorada, garantía de 1 año', 2),
+(NULL, 'Teclado', 'Nuevo', 'Logitech', 30, '2023-07-15', 'Retroiluminado, teclas mecánicas', 2),
+(NULL, 'Monitor', 'Nuevo', 'Dell', 12, '2023-08-03', 'Pantalla IPS de alta resolución', 1);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

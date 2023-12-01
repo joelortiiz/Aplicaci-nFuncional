@@ -19,8 +19,8 @@ echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí <
         <title>Página</title>
     </head>
     <body>
-
-                <div class="container d-flex justify-content-center align-items-center flex-column">
+        <?php // if(isset())  ?>
+                <div class="container d-flex justify-content-center align-items-center flex-column text-center">
                     <header class="d-flex flex-column">
                      
                         <h1>
@@ -56,7 +56,7 @@ echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí <
                                     <?php
                                     $search = $db->prepare("SELECT * FROM objeto WHERE Codalmacen "
                                             . "IN (SELECT codalmacen FROM almacen WHERE codusuario = "
-                                            . "(SELECT Codusuario FROM usuario WHERE Nomusuario = 'joelortiz')) "
+                                            . "(SELECT Codusuario FROM usuario WHERE Nomusuario = '". $_COOKIE['usercookie'] ."')) "
                                             . "AND Codalmacen = " .$_GET['id']);
 
                         
@@ -130,7 +130,9 @@ echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí <
                 </div>
 
                 <?php
-            
+        //} else {
+          //  echo 'No puedes acceder a esta página';
+       // }
         
         ?>
 
