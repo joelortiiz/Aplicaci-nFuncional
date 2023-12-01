@@ -112,7 +112,7 @@ if (isset($user)) {
                                         </td>
                                         <td>
                                             <div class="mt-2 text-center">
-                                                <a href="./objetos.php?id=<?php echo $fetch['codalmacen'] ?>" class="btn btn-primary">Entrar</a>
+                                                <a href="./objetos.php?id=<?php echo $fetch['codalmacen'] ?>&name=<?php echo $fetch['nomalmacen']?>" class="btn btn-primary">Entrar</a>
                                             </div>
                                         </td>
                                         </tr>

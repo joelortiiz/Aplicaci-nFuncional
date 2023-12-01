@@ -7,6 +7,7 @@ session_start();
 
 //Aquí, se manda a un enlace que cierra la sesión
 echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí </a>';
+echo $_GET['id'];
 
 ?>
 <!DOCTYPE html>
@@ -19,16 +20,16 @@ echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí <
         <title>Página</title>
     </head>
     <body>
-        <?php // if(isset())  ?>
+        <?php  if(isset($_SESSION["name"])) {  ?>
                 <div class="container d-flex justify-content-center align-items-center flex-column text-center">
                     <header class="d-flex flex-column">
                      
                         <h1>
-                            Bienvenido a tu inventario de, <?php echo "<p class='text-uppercase'>" .$_COOKIE['usercookie'] ."</p>"; ?>
+                            Bienvenido a tu inventario de <?php echo "<p class='text-uppercase'>" .$_GET['name'] ."</p>"; ?>
                         </h1>
                         <?php
                         setlocale(LC_TIME, "spanish");
-                        $fecha_act = strftime("%A, %d de %B de %Y");
+                        $fecha_act = strftime("%A %d de %B de %Y");
                         ?>
                         <p><?= $fecha_act ?></p> 
                     </header>
@@ -130,9 +131,9 @@ echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí <
                 </div>
 
                 <?php
-        //} else {
-          //  echo 'No puedes acceder a esta página';
-       // }
+        } else {
+            echo 'No puedes acceder a esta página';
+        }
         
         ?>
 
