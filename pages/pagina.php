@@ -51,7 +51,7 @@ if (isset($user)) {
                 //inicio de la sesión.
                 session_start();
                 $_SESSION['name'] = $nombre;
-                //   header('Location: ../functions/session_validate.php');
+             //      header('Location: ../functions/session_validate.php');
                 ?>
 
                 <div class="container d-flex justify-content-center align-items-center flex-column">
@@ -112,7 +112,7 @@ if (isset($user)) {
                                         </td>
                                         <td>
                                             <div class="mt-2 text-center">
-                                                <a href="./objetos.php" class="btn btn-primary">Entrar</a>
+                                                <a href="./objetos.php?id=<?php echo $fetch['codalmacen'] ?>" class="btn btn-primary">Entrar</a>
                                             </div>
                                         </td>
                                         </tr>

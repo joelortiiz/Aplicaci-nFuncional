@@ -37,13 +37,14 @@ echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí <
                             Estos son tus inventarios:
                         </h2>
                         <section>
-                            <table class="table table-striped table-bordered">
+                            <table class="table table-striped table-bordered text-center">
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">C.Objeto</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Estado</th>
                                         <th scope="col">Marca</th>
+                                        <th scope="col">Stock</th>
                                         <th scope="col">Año</th>
                                         <th scope="col">Comentario</th>
                                         <th scope="col">C.Almacén</th>
@@ -53,7 +54,10 @@ echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí <
                                 <tbody>
 
                                     <?php
-                                    $search = $db->prepare("SELECT * FROM objeto WHERE Codalmacen IN (SELECT codalmacen FROM almacen WHERE codusuario = (SELECT Codusuario FROM usuario WHERE Nomusuario = 'joelortiz'))");
+                                    $search = $db->prepare("SELECT * FROM objeto WHERE Codalmacen "
+                                            . "IN (SELECT codalmacen FROM almacen WHERE codusuario = "
+                                            . "(SELECT Codusuario FROM usuario WHERE Nomusuario = 'joelortiz')) "
+                                            . "AND Codalmacen = " .$_GET['id']);
 
                         
                                     $search->execute();
@@ -68,8 +72,10 @@ echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí <
                                             <td><?php echo $fetch['Stock'] ?></td>
                                             <td><?php echo $fetch['Anio'] ?></td>
                                             <td><?php echo $fetch['Comentario'] ?></td>
+                                            <td><?php echo $fetch['Codalmacen'] ?></td>
                                              <td>
                                             <div class="mt-2 text-center">
+                                                
                                                  <a href="delete.php?id=<?php echo $id ?>" class="btn btn-danger">X</a>
                                             </div>
                                         </td>
@@ -77,13 +83,6 @@ echo '¿Quieres cerrar la sesión?<a href=../functions/logout.php> Pulsa aquí <
                                             <div class="mt-2 text-center">
                                                 <button type="submit" class="btn btn-warning">
                                                     Actualizar
-                                                </button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="mt-2 text-center">
-                                                <button type="submit" class="btn btn-primary">
-                                                    Entrar
                                                 </button>
                                             </div>
                                         </td>

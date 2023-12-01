@@ -34,7 +34,7 @@
                 <form class="" action="./pages/pagina.php" method="POST">
                     <div class="form-group">
                         <label for="username">Nombre de Usuario</label>
-                        <input type="text" class="form-control" id="username" placeholder="Usuario" name="username" value=<?php if(isset($_COOKIE['usercookie']))echo $_POST['usercookie']; ?>>
+                        <input type="text" class="form-control" id="username" placeholder="Usuario" name="username" value="<?php if(isset($_COOKIE['usercookie']))echo $_COOKIE['usercookie']; ?>">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputPassword1">Contraseña</label>
