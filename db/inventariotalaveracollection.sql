@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-11-2023 a las 10:54:30
+-- Tiempo de generación: 04-12-2023 a las 17:34:07
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -40,7 +40,9 @@ CREATE TABLE `almacen` (
 --
 
 INSERT INTO `almacen` (`codalmacen`, `nomalmacen`, `direccionalmacen`, `telefonoalmacen`, `codusuario`) VALUES
-(1, 'Almacen 1', 'Calle Inventada', '12 34 56 78', 1);
+(1, 'coleccion magic', 'avenida pepe', '12345', 1),
+(2, 'ropa verano', 'Av. América 142', '12345', 1),
+(3, 'electrodomésticos', 'Avenida venida', '9459496', 3);
 
 -- --------------------------------------------------------
 
@@ -58,6 +60,26 @@ CREATE TABLE `objeto` (
   `Comentario` varchar(100) NOT NULL,
   `Codalmacen` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `objeto`
+--
+
+INSERT INTO `objeto` (`Claveobjeto`, `Nombreobjeto`, `Estadoobjeto`, `Marca`, `Stock`, `Anio`, `Comentario`, `Codalmacen`) VALUES
+(5, 'Laptop', 'Nuevo', 'HP', 20, '2023-01-15', 'Último modelo, pantalla táctil', 1),
+(6, 'Smartphone', 'Usado', 'Samsung', 15, '2023-02-02', 'Pequeños rasguños en la parte posterior', 1),
+(7, 'Auriculares', 'Nuevo', 'Sony', 50, '2023-03-10', 'Cancelación de ruido, cable desmontable', 1),
+(8, 'Cámara', 'Seminuevo', 'Canon', 10, '2023-04-05', 'Incluye estuche y tarjeta de memoria', 2),
+(9, 'Impresora', 'Nuevo', 'Epson', 5, '2023-05-20', 'Impresión a color, conexión inalámbrica', 1),
+(10, 'Altavoces', 'Reacondicionado', 'Bose', 8, '2023-06-08', 'Calidad de sonido mejorada, garantía de 1 año', 2),
+(11, 'Teclado', 'Nuevo', 'Logitech', 30, '2023-07-15', 'Retroiluminado, teclas mecánicas', 1),
+(12, 'Monitor', 'Nuevo', 'Dell', 12, '2023-08-03', 'Pantalla IPS de alta resolución', 1),
+(13, 'Laptop', 'Semi-Nuevo', 'HP Victus', 5, '2023-01-15', 'Último modelo, pantalla táctil', 3),
+(14, 'Tablet', 'Nuevo', 'Apple', 25, '2023-09-12', 'Pantalla retina, procesador potente', 3),
+(15, 'Smartwatch', 'Usado', 'Fitbit', 10, '2023-10-08', 'Funciona perfectamente, batería nueva', 3),
+(16, 'Micrófono', 'Nuevo', 'Audio-Technica', 15, '2023-11-20', 'Calidad de grabación profesional', 3),
+(17, 'Gafas VR', 'Seminuevo', 'Oculus', 7, '2023-12-01', 'Inmersión total, caja original incluida', 3),
+(18, 'Router', 'Nuevo', 'Linksys', 3, '2023-01-05', 'Conexión de alta velocidad, fácil configuración', 3);
 
 -- --------------------------------------------------------
 
@@ -78,8 +100,8 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`Codusuario`, `Nomusuario`, `Contraseñausuario`, `Direccionusuario`, `Telefonousuario`) VALUES
-(1, 'ivangargalan', '123', 'Calle Eusebio Rubalcaba 1', '674222839'),
-(5, 'usuario2', '81dc9bdb52d04dc20036dbd8313ed055', 'casa', '1234567890');
+(1, 'joelortiz', '1234', 'Avenida casa', '98765'),
+(3, 'jowell', '926e27eecdbc7a18858b3798ba99bddd', 'Avenida avenida', '123456');
 
 --
 -- Índices para tablas volcadas
@@ -113,19 +135,19 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `almacen`
 --
 ALTER TABLE `almacen`
-  MODIFY `codalmacen` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `codalmacen` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `objeto`
 --
 ALTER TABLE `objeto`
-  MODIFY `Claveobjeto` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `Claveobjeto` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `Codusuario` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Codusuario` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restricciones para tablas volcadas
