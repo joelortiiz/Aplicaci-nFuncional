@@ -82,7 +82,7 @@ session_start();
 
                             <?php
                             
-                            $search = $db->prepare("select nomalmacen, direccionalmacen, telefonoalmacen FROM almacen where codusuario = (select Codusuario from usuario where Nomusuario = '" . $_SESSION['name'] . "')");
+                            $search = $db->prepare("select * FROM almacen where codusuario = (select Codusuario from usuario where Nomusuario = '" . $_COOKIE['usercookie'] . "')");
 
                             $search->execute();
                             // Se recoge cada resultado y se lleva a la tabla
@@ -90,9 +90,16 @@ session_start();
                                 ?>
                                 <tr>
                                     <!-- Carga los almacenes.-->
-                                    <td><?php echo $fetch['nomalmacen'] ?></td>
-                                    <td><?php echo $fetch['direccionalmacen'] ?></td>
-                                    <td><?php echo $fetch['telefonoalmacen'] ?></td>
+                                      <td><?php echo $fetch['codalmacen'] ?></td>
+                                        <td><?php echo $fetch['nomalmacen'] ?></td>
+                                        <td><?php echo $fetch['direccionalmacen'] ?></td>
+                                        <td><?php echo $fetch['telefonoalmacen'] ?></td>
+                                        <td><?php echo $fetch['codusuario'] ?></td>
+                                        <td>
+                                            <div class="mt-2 text-center">
+                                                <a href="../pages/objetos.php?id=<?= $fetch['codalmacen'] ?>&name=<?= $fetch['nomalmacen'] ?>" class="btn btn-primary">Entrar</a>
+                                            </div>
+                                        </td>
                                 </tr>
 
                                 <?php

@@ -29,7 +29,18 @@
                
                 //Hacer cookie con usuario
                 //inicio de la sesión.
+                
+                //creacion de la cookie
                 session_start();
+                if(isset($_COOKIE['usercookie'])){
+                    //se borra la cookie
+                   setcookie("usercookie","",time() - 3600 * 24,"/"); 
+                   //se hace la nueva cookie
+                   setcookie("usercookie",$_POST['username'],time() + 3600 *24,"/");
+                } else {
+                    //crea la cookie
+                   setcookie("usercookie",$_POST['username'],time() + 3600 *24,"/");
+                }
                 $_SESSION['name'] = $nombre;
                 header('Location: ../functions/session_validate.php');
             } else {

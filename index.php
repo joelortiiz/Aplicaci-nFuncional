@@ -25,7 +25,7 @@
                     if(isset($_GET['error'])){
                         echo '<p class="text-danger"> Datos incorrectos </p>';
                     }
-                ?>
+                ?>           
                 <form class="" action="./pages/pagina.php" method="POST">
                     <div class="form-group">
                         <label for="username">Nombre de Usuario</label>
